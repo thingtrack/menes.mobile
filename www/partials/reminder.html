@@ -1,0 +1,22 @@
+
+<div ng-show="reminders == null || reminders.length == 0">
+	<h2>No hay ningún recordatorio</h2>
+</div>
+<div ng-show="reminders.length > 0">
+    <ul mobiscroll-listview="reminders" mobiscroll-options="{ iconSlide: true,
+       	   						 			stages: [ { percent: 20, icon: 'checkmark', color: '#00CC00', action: checkReminder },
+	                               					  { percent: -20, icon: 'close', color: '#e61300', action: removeReminder, confirm: true }]}">
+	  	<div ng-class="{ 'reminder-done': item.done }">
+	  		<p>{{item.date.getDate()}}/{{item.date.getMonth()}}/{{item.date.getFullYear()}}</p>
+	  		
+	  		<h2>{{item.text}} - {{getTreatment(item.treatment.type)}}</h2>
+			
+			<p ng-show="item.treatment.vaccines.length > 0">
+				{{getVaccine(item.treatment.vaccines)}}	  			
+	  		</p>
+	  		<p ng-show="item.treatment.notes">
+	  			{{item.treatment.notes}}
+	  		</p>	  		
+	  	</div>
+	</ul>
+</div>

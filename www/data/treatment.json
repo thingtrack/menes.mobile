@@ -1,0 +1,14 @@
+[
+	{
+		"id": 0,
+		"name": "Vacunas"
+	},
+	{
+		"id": 1,
+		"name": "Desparasitación interna"
+	},
+	{
+		"id": 2,
+		"name": "Desparasitación externa"
+	}
+]

@@ -1,0 +1,74 @@
+<form ng-submit="add(reminder)" apply-jqm>
+	<div class="ui-field-contain">
+	    <label for="reminder-text">Asunto</label>
+	    <input name="reminder-text" id="reminder-text" type="text" ng-model="reminder.text">
+	</div>
+	<div class="ui-field-contain">
+	    <label for="reminder-pet">Mascota</label>
+   		<select name="reminder-pet" id="reminder-pet" 
+   			ng-model="reminder.pet" ng-model="reminder.frequency" ng-options="pet.id as pet.name for pet in pets" apply-jqm-select-refresh>
+       	</select>
+	</div>
+	<div class="ui-field-contain">
+    	<label for="reminder-begin">Apartir de</label>
+    	<input name="reminder-begin" id="reminder-begin" type="text" mobiscroll-date="reminder.begin" 
+			mobiscroll-options="{ 
+					display: 'bottom',
+					mode: 'mixed',
+					theme: 'jqm',
+					dateFormat: 'dd/mm/yy',
+					dateOrder: 'ddmmyy',
+					dayText: 'Días',
+					monthText: 'Mes',
+					yearText: 'Año',
+					setText: 'Aceptar',
+					cancelText: 'Cancelar'
+				}" />
+	</div>
+	<div class="ui-field-contain">
+		<label for="reminder-quantity">Frecuencia</label>
+		<fieldset class="ui-grid-a">
+			<div class="ui-block-a">
+				<input name="reminder-quantity" id="reminder-quantity" type="number" ng-model="reminder.quantity" ng-disabled="reminder.frequency == 0" disabled="disabled">
+			</div>
+			<div class="ui-block-b">
+				<select name="reminder-frequency" id="reminder-frequency" data-mini="true" 
+					ng-model="reminder.frequency" ng-options="frequency.id as frequency.text for frequency in frequencies" apply-jqm-select-refresh ng-change="changeFrequency(reminder.frequency)">
+	       		</select>
+			</div>	
+		</fieldset>		
+	</div>
+	<div class="ui-field-contain">
+		<label for="reminder-treatment">Tratamiento</label>
+   		<select name="reminder-treatment" id="reminder-treatment" 
+   			ng-model="reminder.treatment.type"
+   			ng-options="treatment.id as treatment.name for treatment in treatments" apply-jqm-select-refresh
+   			ng-change="changeTreatment(reminder.treatment.type)">        	
+       	</select>	
+	</div>
+	<div class="ui-field-contain" ng-show="reminder.treatment.type == 0">
+    	<fieldset data-role="controlgroup">
+    		<legend>Tipo</legend>
+    		<label for="vaccine.quadrivalent">
+    			<input name="vaccine.quadrivalent" id="vaccine.quadrivalent" type="checkbox" 
+    				ng-model="reminder.treatment.vaccines.quadrivalent" ng-true-value="0" ng-false-value="-1">
+    			Tetravalente
+    		</label>
+    		<label for="vaccine.rabies">
+    			<input name="vaccine.rabies" id="vaccine.rabies" type="checkbox" 
+    				ng-model="reminder.treatment.vaccines.rabies" ng-true-value="1" ng-false-value="-1">
+    			Antirrábica
+    		</label>
+    		<label for="vaccine.other">
+	    		<input name="vaccine.other" id="vaccine.other" type="checkbox" 
+	    			ng-model="reminder.treatment.vaccines.other" ng-true-value="2" ng-false-value="-1">
+    			Otra
+    		</label>	
+		</fieldset>
+	</div>	
+	<div class="ui-field-contain" ng-show="reminder.treatment.type != 0">
+    	<label for="reminder-notes">Notas</label>
+    	<textarea cols="40" rows="8" name="reminder-notes" id="reminder-notes" ng-model="reminder.treatment.notes">Textarea</textarea>
+	</div>
+	<button type="submit">Crear</button>
+</form>

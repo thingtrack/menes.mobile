@@ -1,0 +1,15 @@
+{
+  "name": "menes-mobile",
+  "description": "The aplicación móbil para la clínica veterinaria Nacho Menes",
+  "version": "0.0.1.SNAPSHOT",
+  "homepage": "https://github.com/angular/angular-seed",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.2.x",
+    "angular-route": "1.2.x",
+    "angular-loader": "1.2.x",
+    "angular-mocks": "~1.2.15",
+    "angular-carousel": "~0.2.3"
+  }
+}

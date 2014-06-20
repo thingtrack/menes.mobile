@@ -1,0 +1,15 @@
+# sublime project files
+*.sublime-project
+*.sublime-workspace
+
+# build output
+# cordova plataform compilation
+merges/**/*
+platforms/**/*
+
+# bower and npm files
+www/node_modules
+www/bower_components
+
+!.gitkeep
+
