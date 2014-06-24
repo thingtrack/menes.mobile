@@ -1,14 +1,26 @@
 [
 	{
 		"id": 0,
-		"text": "Ninguna"
+		"text": "Una vez"
 	},
 	{
 		"id": 1,
-		"text": "Meses"
+		"text": "Mensual"
 	},
 	{
 		"id": 2,
-		"text": "Años"
+		"text": "Bimensual"
+	},
+	{
+		"id": 3,
+		"text": "Trimestral" 
+	},
+	{
+		"id": 4,
+		"text": "Semestral"
+	},
+	{
+		"id": 5,
+		"text": "Anual"
 	}
 ]

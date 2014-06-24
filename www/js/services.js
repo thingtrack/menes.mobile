@@ -70,36 +70,82 @@ angular.module('myApp.services', [])
 			reminders.push(new Reminder(reminders.length.toString(), reminder.text, reminder.pet, reminder.begin, reminder.treatment));
 		},
 		addWithFrequency: function(reminder){
+			
+			var repetition = 0;
+			var duration = parseInt(reminder.duration);
+			
+			switch(reminder.frequency){
+  			  // only once
+  			  case 0:
+  			  	repetition = 1;
+      			break;
+       		  // monthly
+    		  case 1:
+    		  	repetition = 12 * duration; 
+		        break;
+		       //bimonthly
+	          case 2:
+	          	repetition = 6 * duration;
+		        break;
+		      // quarterly
+ 	          case 3:
+ 	            repetition = 4 * duration;  	            
+ 	            break;
+		      // semiannual
+		      case 4:
+		        repetition = 2 * duration;
+		        break;
+		      // annual
+	          case 5:
+	          	repetition = 1 * duration;
+		        break;
+		      // only once
+			  default:
+	     		repetition = 1;
+			  	break;		     	 
+			}
+
+			// create a new date object
 			var reminderDate = new Date(reminder.begin);
 
-			reminders.push(new Reminder(reminders.length.toString(), reminder.text, reminder.pet, reminderDate, reminder.treatment));
-			reminder.quantity --;
-
-			// add local notification
-			addLocalNotification(reminders[reminders.length-1]);
-			
-			// add the the rest by frequency
-			while(reminder.quantity > 0){
-
-				reminderDate = new Date(reminderDate.getTime());
-
-				// month frequency
-				if(reminder.frequency == 1){
-					reminderDate.setMonth(reminderDate.getMonth() + 1);	
-				}
-				// year frequency
-				if(reminder.frequency == 2){
-					reminderDate.setFullYear(reminderDate.getFullYear() + 1);
-				}
+			while(repetition > 0){
 
 				reminders.push(new Reminder(reminders.length.toString(), reminder.text, reminder.pet, reminderDate, reminder.treatment));
-				reminder.quantity --;
-
 				// add local notification
-				addLocalNotification(reminders[reminders.length-1]);				
-			}
+				addLocalNotification(reminders[reminders.length-1]);
+
+				// create a new date object
+				reminderDate = new Date(reminderDate.getTime());
+			
+				switch(reminder.frequency){
+	       		  // monthly
+	    		  case 1:
+	    		    reminderDate.setMonth(reminderDate.getMonth() + 1);
+			        break;
+			       //bimonthly
+		          case 2:
+			        reminderDate.setMonth(reminderDate.getMonth() + 2);
+			        break;
+			      // quarterly
+	 	          case 3:
+	  	            reminderDate.setMonth(reminderDate.getMonth() + 3);
+	 	            break;
+			      // semiannual
+			      case 4:
+			        reminderDate.setMonth(reminderDate.getMonth() + 6);
+			        break;
+			      // annual
+		          case 5:
+			        reminderDate.setFullYear(reminderDate.getFullYear() + 1);
+			        break;		     	 
+				}
+
+				repetition --;
+			}			
 		},
-		remove: function(reminderIndex){
+		remove: function(reminder){
+
+			var reminderIndex = reminders.indexOf(reminder);
 
 			if(reminderIndex > -1){
 				// before the local notification
@@ -108,8 +154,10 @@ angular.module('myApp.services', [])
 				reminders.splice(reminderIndex, 1);
 			}
 		},
-		check : function(reminderIndex, done){
+		check: function(reminder, done){
 			
+			var reminderIndex = reminders.indexOf(reminder);
+
 			if(reminderIndex > -1){
 				// before the local notification
 				removeLocalNotification(reminders[reminderIndex]);

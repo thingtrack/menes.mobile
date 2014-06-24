@@ -6,7 +6,7 @@ angular.module("myApp.controllers.reminder", [])
 	$routeProvider.when('/reminder', {templateUrl: 'partials/reminder.html', controller: 'ReminderCtrl'});
 	$routeProvider.when('/reminder/newReminder', {templateUrl: 'partials/reminder-new.html', controller: 'ReminderNewCtrl'});
 }])
-.controller("ReminderCtrl", ["$scope", "$http", "reminderService", function($scope, $http, reminderService){
+.controller("ReminderCtrl", ["$scope", "$http", "ngDialog", "reminderService", function($scope, $http, ngDialog, reminderService){
 
     $scope.changeHeaderTitle("Recordatorios");
     $scope.addHeaderLeftButton("Menu", "#main-menu", "ui-icon-bars");
@@ -58,17 +58,12 @@ angular.module("myApp.controllers.reminder", [])
         return vaccines;
     }
 
-    $scope.checkReminder = function (li, item, index) {
-        $scope.$apply(function(){
-            reminderService.check(index, true);
-        });
-    };
+    $scope.checkReminder = function (selectedReminder) {
+        reminderService.check(selectedReminder, !selectedReminder.done);
+    }
 
-    // the action which is called from mobiscroll
-    $scope.removeReminder = function (li, item, index) {
-        $scope.$apply(function(){
-            reminderService.remove(index);
-        });
+    $scope.removeReminder = function (selectedReminder) {
+        reminderService.remove(selectedReminder);
     }
 }])
 .controller("ReminderNewCtrl", ["$scope", "$location", "$http", "reminderService", function($scope, $location, $http, reminderService){
@@ -105,10 +100,10 @@ angular.module("myApp.controllers.reminder", [])
     $scope.changeFrequency = function(frequency){
 
         if(frequency == 0){
-            $scope.reminder.quantity = "";
-            $('#reminder-quantity').textinput('disable');            
+            $scope.reminder.duration = "";
+            $('#reminder-duration').textinput('disable');            
         }else{
-            $('#reminder-quantity').textinput('enable');
+            $('#reminder-duration').textinput('enable');
         }
     }
 
@@ -122,7 +117,7 @@ angular.module("myApp.controllers.reminder", [])
         }        
     }
 
-    $scope.add = function(reminder){
+    $scope.addReminder = function(reminder){
         reminderService.addWithFrequency(reminder);
         $location.path('/reminder');        
     }

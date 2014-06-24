@@ -1,22 +1,19 @@
-
-<div ng-show="reminders == null || reminders.length == 0">
-	<h2>No hay ningún recordatorio</h2>
-</div>
-<div ng-show="reminders.length > 0">
-    <ul mobiscroll-listview="reminders" mobiscroll-options="{ iconSlide: true,
-       	   						 			stages: [ { percent: 20, icon: 'checkmark', color: '#00CC00', action: checkReminder },
-	                               					  { percent: -20, icon: 'close', color: '#e61300', action: removeReminder, confirm: true }]}">
-	  	<div ng-class="{ 'reminder-done': item.done }">
-	  		<p>{{item.date.getDate()}}/{{item.date.getMonth()}}/{{item.date.getFullYear()}}</p>
-	  		
-	  		<h2>{{item.text}} - {{getTreatment(item.treatment.type)}}</h2>
-			
-			<p ng-show="item.treatment.vaccines.length > 0">
-				{{getVaccine(item.treatment.vaccines)}}	  			
-	  		</p>
-	  		<p ng-show="item.treatment.notes">
-	  			{{item.treatment.notes}}
-	  		</p>	  		
-	  	</div>
-	</ul>
+<div apply-jqm>
+	<div ng-show="reminders == null || reminders.length == 0">
+		<h2>No hay ningún recordatorio</h2>
+	</div>
+	<div ng-show="reminders.length > 0">
+		<ul data-role="listview" data-split-icon="delete" data-theme="a" data-split-theme="b" data-inset="true" data-filter="true" data-filter-placeholder="Buscar recordatorio(s)..." apply-jqm-list-refresh ng-model="reminders">
+		    <li class="ui-li-has-thumb ui-li-has-alt ui-last-child" ng-class="{ 'reminder-done': reminder.done }" ng-repeat="reminder in reminders | orderBy:'date':false" apply-jqm-list>
+		    	<a ng-href="" ng-click="checkReminder(reminder)">
+		    		<img ng-if="reminder.treatment.type == 0" ng-src="img/icons/syringe.png">
+					<img ng-if="reminder.treatment.type != 0" ng-src="img/icons/pill.png">
+					<h2>{{reminder.text}}</h2>
+		    		<p>{{getTreatment(reminder.treatment.type)}}</p>
+		    		<p class="ui-li-aside">{{reminder.date.getDate()}}/{{reminder.date.getMonth()}}/{{reminder.date.getFullYear()}}</p>
+		        </a>
+		        <a ng-href="" ng-click="removeReminder(reminder)">Delete item</a>
+		    </li>
+  		</ul>
+	</div>		
 </div>
