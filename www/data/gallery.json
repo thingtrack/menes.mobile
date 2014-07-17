@@ -1,0 +1,62 @@
+[
+	{
+		"label": "Acceso al hospital veterinario",
+		"path": "img/hospital-access.jpg"
+	},
+	{
+		"label": "Quirano: cirugía traumatológica y neurocirugía",
+		"path": "img/operating-room.jpg"
+	},
+	{
+		"label": "Ecografía y ecocardiografía",
+		"path": "img/ultrasound.jpg"		
+	},
+	{
+		"label": "Laboratorio",
+		"path": "img/laboratory.jpg"
+	},
+	{
+		"label": "Microscopio quirúrgico: cirugía oftalmológica",
+		"path": "img/operating-microscope.jpg"
+	},
+	{
+		"label": "hospitalización independiente para gatos",
+		"path": "img/cat-hospitalization.jpg"
+	},
+	{
+		"label": "Radiología digital",
+		"path": "img/digital-radiology.jpg"
+	},
+	{
+		"label": "Servicio de reproducción con laboratorio",
+		"path": "img/sperm-bank.jpg"
+	},
+	{
+		"label": "Sala de hospitalización para perros",
+		"path": "img/hospitalization.jpg"
+	},
+	{
+		"label": "Hospitalización: Boxes para los perros más grandes",
+		"path": "img/big-dog-hospitalization.jpg"
+	},
+	{
+		"label": "Endoscopia",
+		"path": "img/endoscopy.jpg"
+	},
+	{
+		"label": "Quirófano con monitorización anestésia",
+		"path": "img/monitoring-operating-room.jpg"	
+	},
+	{
+		"label": "Jaulas especiales para gatos",
+		"path": "img/feline-cages.jpg"	
+	},
+	{
+		"label": "Sala de fisioterapia con cinta subacuática",
+		"path": "img/physiotherapy.jpg"	
+	},
+	{
+		"label": "Consulta",
+		"path": "img/consultation.jpg"	
+	}
+]

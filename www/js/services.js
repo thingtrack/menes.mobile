@@ -6,7 +6,9 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', [])
-.factory("reminderService", [function(){
+.factory("reminderService", [ "$cordovaPush", function($cordovaPush){
+
+	var notificacionIndex = -1;
 
 	function Treatment(type, vaccines, notes){
 		
@@ -30,18 +32,31 @@ angular.module('myApp.services', [])
 	function addLocalNotification(reminder){
 
 		if(window.plugin){
-
-			var messageStr = "Le recordarmos que a " + reminder.text + " le corresponde";
-		
-			// treatment types
-			if(reminder.treatment.type == 0){
-				messageStr += " la vacuna. No olvide llamarnos para pedir cita previa";	
+			var messageStr = "";
+			// Vaccines & deworming
+			if(0 <= reminder.treatment.type < 3){
+				messageStr = "Le recordarmos que a " + reminder.text + " le corresponde";
+			
+				// treatment types
+				if(reminder.treatment.type == 0){
+					messageStr += " la vacuna. No olvide llamarnos para pedir cita previa";	
+				}
+				if(reminder.treatment.type == 1){
+					messageStr += " la desparasitación interna.";
+				}
+				if(reminder.treatment.type == 2){
+					messageStr += " la desparasitación externa.";
+				}
 			}
-			if(reminder.treatment.type == 1){
-				messageStr += " la desparasitación interna.";
-			}
-			if(reminder.treatment.type == 2){
-				messageStr += " la desparasitación externa.";
+			else{
+				// Review
+				if(reminder.treatment.type == 3){
+					messageStr += "Le recordamos que " + reminder.text + " debe acudir a su revisión periódica, no olvide llamarnos para pedir cita previa";
+				}
+				// General treatment
+				if(reminder.treatment.type == 3){
+					messageStr += "Le recordamos que a " + reminder.text + " le corresponde su tratamiento";
+				}
 			}
 			window.plugin.notification.local.add({
 				id: reminder.id,
@@ -49,15 +64,23 @@ angular.module('myApp.services', [])
 			    message: messageStr,
 			    date: reminder.date
 			});
+
+			// retrive the Scheduled Local Notifications
+			window.plugin.notification.local.getScheduledIds(function (scheduledIds) {
+    			alert('Scheduled IDs: ' + scheduledIds.join(' ,'));
+    		});
 		}
 	}
 
 	function removeLocalNotification(reminder){
 		if(window.plugin){
-			/* window.plugin.notification.local.cancel(reminder.id, function (){
-				alert("Removed notification!");
-			}, scope);*/
-		}
+			window.plugin.notification.local.cancel(reminder.id, function (){
+				// retrive the Scheduled Local Notifications
+				window.plugin.notification.local.getScheduledIds(function (scheduledIds) {
+	    			alert('Scheduled IDs: ' + scheduledIds.join(' ,'));
+	    		});
+			});
+		}		
 	}
 
 	var reminders = [];
@@ -67,9 +90,6 @@ angular.module('myApp.services', [])
 			return reminders;
 		},
 		add: function(reminder){
-			reminders.push(new Reminder(reminders.length.toString(), reminder.text, reminder.pet, reminder.begin, reminder.treatment));
-		},
-		addWithFrequency: function(reminder){
 			
 			var repetition = 0;
 			var duration = parseInt(reminder.duration);
@@ -87,16 +107,20 @@ angular.module('myApp.services', [])
 	          case 2:
 	          	repetition = 6 * duration;
 		        break;
+		      // trimestral
+		      case 3:
+		      	repetition = 4 * duration;
+		      	break;
 		      // quarterly
- 	          case 3:
- 	            repetition = 4 * duration;  	            
+ 	          case 4:
+ 	            repetition = 3 * duration;  	            
  	            break;
 		      // semiannual
-		      case 4:
+		      case 5:
 		        repetition = 2 * duration;
 		        break;
 		      // annual
-	          case 5:
+	          case 6:
 	          	repetition = 1 * duration;
 		        break;
 		      // only once
@@ -110,7 +134,9 @@ angular.module('myApp.services', [])
 
 			while(repetition > 0){
 
-				reminders.push(new Reminder(reminders.length.toString(), reminder.text, reminder.pet, reminderDate, reminder.treatment));
+				
+				notificacionIndex ++; 
+				reminders.push(new Reminder(notificacionIndex.toString(), reminder.text, reminder.pet, reminderDate, reminder.treatment));
 				// add local notification
 				addLocalNotification(reminders[reminders.length-1]);
 
@@ -126,16 +152,20 @@ angular.module('myApp.services', [])
 		          case 2:
 			        reminderDate.setMonth(reminderDate.getMonth() + 2);
 			        break;
-			      // quarterly
+			      // trimestral
 	 	          case 3:
 	  	            reminderDate.setMonth(reminderDate.getMonth() + 3);
 	 	            break;
+	 	          // quarterly
+	 	          case 4:
+	  	            reminderDate.setMonth(reminderDate.getMonth() + 4);
+	 	            break;
 			      // semiannual
-			      case 4:
+			      case 5:
 			        reminderDate.setMonth(reminderDate.getMonth() + 6);
 			        break;
 			      // annual
-		          case 5:
+		          case 6:
 			        reminderDate.setFullYear(reminderDate.getFullYear() + 1);
 			        break;		     	 
 				}
@@ -151,7 +181,7 @@ angular.module('myApp.services', [])
 				// before the local notification
 				removeLocalNotification(reminders[reminderIndex]);
 
-				reminders.splice(reminderIndex, 1);
+				reminders.splice(reminderIndex, 1);				
 			}
 		},
 		check: function(reminder, done){
@@ -159,12 +189,19 @@ angular.module('myApp.services', [])
 			var reminderIndex = reminders.indexOf(reminder);
 
 			if(reminderIndex > -1){
-				// before the local notification
-				removeLocalNotification(reminders[reminderIndex]);
+
+				if(!done){
+					// remove the local notification
+					removeLocalNotification(reminders[reminderIndex]);
+				}
+				else{
+					// add local notification
+					addLocalNotification(reminders[reminderIndex]);
+				}
 
 				reminders[reminderIndex].done = done;
 			}
 		}
 	}
 }])
-.value('version', '0.1');
+.value('version', '1.0');

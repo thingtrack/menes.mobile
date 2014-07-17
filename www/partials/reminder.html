@@ -3,16 +3,18 @@
 		<h2>No hay ningún recordatorio</h2>
 	</div>
 	<div ng-show="reminders.length > 0">
-		<ul data-role="listview" data-split-icon="delete" data-theme="a" data-split-theme="b" data-inset="true" data-filter="true" data-filter-placeholder="Buscar recordatorio(s)..." apply-jqm-list-refresh ng-model="reminders">
+		<ul data-role="listview" data-split-icon="delete" data-inset="true" data-filter="true" data-filter-placeholder="Buscar recordatorio(s)..." apply-jqm-list-refresh ng-model="reminders">
 		    <li class="ui-li-has-thumb ui-li-has-alt ui-last-child" ng-class="{ 'reminder-done': reminder.done }" ng-repeat="reminder in reminders | orderBy:'date':false" apply-jqm-list>
 		    	<a ng-href="" ng-click="checkReminder(reminder)">
 		    		<img ng-if="reminder.treatment.type == 0" ng-src="img/icons/syringe.png">
 					<img ng-if="reminder.treatment.type != 0" ng-src="img/icons/pill.png">
 					<h2>{{reminder.text}}</h2>
-		    		<p>{{getTreatment(reminder.treatment.type)}}</p>
+		    		<p><strong>{{getPet(reminder.pet)}}, {{getTreatment(reminder.treatment.type)}}</strong></p>
+		    		<p>{{getTypes(reminder.treatment.vaccines)}}</p>
+		    		<p>{{reminder.treatment.notes}}</p>
 		    		<p class="ui-li-aside">{{reminder.date.getDate()}}/{{reminder.date.getMonth()}}/{{reminder.date.getFullYear()}}</p>
 		        </a>
-		        <a ng-href="" ng-click="removeReminder(reminder)">Delete item</a>
+		        <a ng-href="" data-theme="b" ng-click="removeReminder(reminder)">Delete item</a>
 		    </li>
   		</ul>
 	</div>		

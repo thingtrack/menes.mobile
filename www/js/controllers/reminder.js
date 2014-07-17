@@ -6,7 +6,7 @@ angular.module("myApp.controllers.reminder", [])
 	$routeProvider.when('/reminder', {templateUrl: 'partials/reminder.html', controller: 'ReminderCtrl'});
 	$routeProvider.when('/reminder/newReminder', {templateUrl: 'partials/reminder-new.html', controller: 'ReminderNewCtrl'});
 }])
-.controller("ReminderCtrl", ["$scope", "$http", "ngDialog", "reminderService", function($scope, $http, ngDialog, reminderService){
+.controller("ReminderCtrl", ["$scope", "$http", "reminderService", function($scope, $http, reminderService){
 
     $scope.changeHeaderTitle("Recordatorios");
     $scope.addHeaderLeftButton("Menu", "#main-menu", "ui-icon-bars");
@@ -21,6 +21,10 @@ angular.module("myApp.controllers.reminder", [])
 
     $http.get('data/vaccine.json').success(function(data) {
         $scope.vaccines = data;
+    });
+
+    $http.get('data/species.json').success(function(data) {
+        $scope.pets = data;
     });    
 
     $scope.getTreatment = function(id){
@@ -58,6 +62,30 @@ angular.module("myApp.controllers.reminder", [])
         return vaccines;
     }
 
+    $scope.getPet = function(id){
+
+        for (var i = 0; i < $scope.pets.length; i++) {
+            if($scope.pets[i].id == id)
+                return $scope.pets[i].name;
+        }
+    }    
+
+    $scope.getTypes = function(vaccines){
+        var vaccineTypes = "";
+        jQuery.each(vaccines, function (name, value) {
+            
+            if(value != null){
+               var typeValue = parseInt(value);
+               for (var i = 0; i < $scope.vaccines.length; i++) {
+                    if($scope.vaccines[i].id == typeValue)
+                        vaccineTypes = vaccineTypes + " " + $scope.vaccines[i].name;
+                }                
+            }
+        });
+
+        return vaccineTypes;
+    }
+
     $scope.checkReminder = function (selectedReminder) {
         reminderService.check(selectedReminder, !selectedReminder.done);
     }
@@ -74,7 +102,7 @@ angular.module("myApp.controllers.reminder", [])
     $scope.reminder.treatment = {};
 
     // charge the selectable controls
-    $http.get('data/pet.json').success(function(data) {
+    $http.get('data/species.json').success(function(data) {
         $scope.pets = data;
         $scope.reminder.pet = 0;
     });
@@ -97,6 +125,13 @@ angular.module("myApp.controllers.reminder", [])
         $scope.types = data;
     });
 
+    $scope.changePet = function(pet){
+
+        $scope.reminder.treatment.vaccines = {};
+        $("input[type='checkbox']").attr("checked", false).checkboxradio("refresh");
+           
+    }
+
     $scope.changeFrequency = function(frequency){
 
         if(frequency == 0){
@@ -118,7 +153,7 @@ angular.module("myApp.controllers.reminder", [])
     }
 
     $scope.addReminder = function(reminder){
-        reminderService.addWithFrequency(reminder);
+        reminderService.add(reminder);
         $location.path('/reminder');        
     }
 }]);

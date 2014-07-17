@@ -10,6 +10,7 @@ angular.module("myApp.controllers.services", [])
     $routeProvider.when('/services/urgency', {templateUrl: 'partials/services-urgency.html', controller: 'ServicesUrgencyCtrl'});
     $routeProvider.when('/services/reproduction', {templateUrl: 'partials/services-reproduction.html', controller: 'ServicesReproductionCtrl'});
 	$routeProvider.when('/services/physiotherapy', {templateUrl: 'partials/services-physiotherapy.html', controller: 'ServicesPhysiotherapyCtrl'});
+	$routeProvider.when('/services/cats', {templateUrl: 'partials/services-cats.html', controller: 'ServicesCatsCtrl'});
 }])
 .controller("ServicesCtrl", ["$scope", function($scope){
 
@@ -33,7 +34,7 @@ angular.module("myApp.controllers.services", [])
 }])
 .controller("ServicesUrgencyCtrl", ["$scope", function($scope){
 
-	$scope.changeHeaderTitle("UCI Urgencias");
+	$scope.changeHeaderTitle("Urgencias 24h");
     $scope.addHeaderLeftButton("Servicios", "#/services", "ui-icon-arrow-l");
 }])
 .controller("ServicesReproductionCtrl", ["$scope", function($scope){
@@ -44,5 +45,10 @@ angular.module("myApp.controllers.services", [])
 .controller("ServicesPhysiotherapyCtrl", ["$scope", function($scope){
 
 	$scope.changeHeaderTitle("Fisioterapia");
+    $scope.addHeaderLeftButton("Servicios", "#/services", "ui-icon-arrow-l");
+}])
+.controller("ServicesCatsCtrl", ["$scope", function($scope){
+
+	$scope.changeHeaderTitle("Gatos");
     $scope.addHeaderLeftButton("Servicios", "#/services", "ui-icon-arrow-l");
 }]);

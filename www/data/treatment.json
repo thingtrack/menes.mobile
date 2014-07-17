@@ -11,4 +11,12 @@
 		"id": 2,
 		"name": "Desparasitación externa"
 	}
+	,{
+		"id": 3,
+		"name": "Revisión"
+	}
+	,{
+		"id": 4,
+		"name": "Tratamiento"
+	}
 ]

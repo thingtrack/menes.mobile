@@ -1,7 +1,7 @@
 [
 	{
 		"id": 0,
-		"text": "Una vez"
+		"text": "Una sola vez"
 	},
 	{
 		"id": 1,
@@ -17,10 +17,14 @@
 	},
 	{
 		"id": 4,
-		"text": "Semestral"
+		"text": "Cuatrimestral"
 	},
 	{
 		"id": 5,
+		"text": "Semestral"
+	},
+	{
+		"id": 6,
 		"text": "Anual"
 	}
 ]

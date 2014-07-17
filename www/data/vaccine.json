@@ -1,14 +1,27 @@
 [
 	{
 		"id": 0,
-		"name": "tetravalente"
+		"name": "Tetravalente",
+		"sort": "dog"
 	},
 	{
 		"id": 1,
-		"name": "antirrabica"
+		"name": "Antirrabica",
+		"sort": "dog"
 	},
 	{
 		"id": 2,
-		"name": "otra"
+		"name": "Pneumodog",
+		"sort": "dog"
+	},
+	{
+		"id": 3,
+		"name": "Trivalente",
+		"sort": "cat"
+	},
+	{
+		"id": 4,
+		"name": "Leucemia",
+		"sort": "cat"
 	}
 ]

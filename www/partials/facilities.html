@@ -1,10 +1,5 @@
-<ul rn-carousel class="image">
-    <li><img src="img/endoscopy.jpg"></li>
-    <li><img src="img/hospitalization.jpg"></li>
-    <li><img src="img/laboratory.jpg"></li>
-    <li><img src="img/ultrasound.jpg"></li>
-    <li><img src="img/operating-room.jpg"></li>
-    <li><img src="img/digital-radiology.jpg"></li>
+<ul rn-carousel rn-carousel-control rn-carousel-indicator class="image" style="height: 300px;">
+  <li ng-repeat="image in images" ng-style="{ backgroundImage: 'url(' + image.path + ')' }" style="background-size: contain; background-repeat: no-repeat;">
+    <div class="slidelabel">{{ image.label }}</div>
+  </li>
 </ul>
-
-

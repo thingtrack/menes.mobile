@@ -8,7 +8,10 @@
 		<li class="ui-field-contain">
 			<label for="reminder-pet">Especie</label>
    			<select name="reminder-pet" id="reminder-pet" 
-   				ng-model="reminder.pet" ng-model="reminder.frequency" ng-options="pet.id as pet.name for pet in pets" apply-jqm-select-refresh>
+   				ng-model="reminder.pet" 
+   				ng-options="pet.id as pet.name for pet in pets"
+   				ng-change="changePet(reminder.pet)"
+   				apply-jqm-select-refresh>
        		</select>			
 		</li>
 		<li data-role="list-divider">Tratamiento</li>
@@ -16,36 +19,62 @@
 			<label for="reminder-treatment">Tipo</label>
    			<select name="reminder-treatment" id="reminder-treatment" 
    				ng-model="reminder.treatment.type"
-   				ng-options="treatment.id as treatment.name for treatment in treatments" apply-jqm-select-refresh
-   				ng-change="changeTreatment(reminder.treatment.type)">        	
+   				ng-options="treatment.id as treatment.name for treatment in treatments"
+   				ng-change="changeTreatment(reminder.treatment.type)"
+   				apply-jqm-select-refresh>        	
        		</select>				
 		</li>
 		<li class="ui-field-contain" ng-show="reminder.treatment.type == 0">
 	    	<fieldset data-role="controlgroup">
 	    		<legend>Tipo vacunas</legend>
-	    		<label for="vaccine.quadrivalent">
+	    		<label for="vaccine.quadrivalent" ng-show="reminder.pet == 0">
 	    			<input name="vaccine.quadrivalent" id="vaccine.quadrivalent" type="checkbox" 
-	    				ng-model="reminder.treatment.vaccines.quadrivalent" ng-true-value="0" ng-false-value="-1">
+	    				ng-model="reminder.treatment.vaccines.quadrivalent" 
+	    				ng-true-value="0"
+	    				ng-false-value="-1"
+	    				ng-show="reminder.pet == 0">
 	    			Tetravalente
 	    		</label>
-	    		<label for="vaccine.rabies">
+	    		<label for="vaccine.rabies" ng-show="reminder.pet == 0">
 	    			<input name="vaccine.rabies" id="vaccine.rabies" type="checkbox" 
-	    				ng-model="reminder.treatment.vaccines.rabies" ng-true-value="1" ng-false-value="-1">
+	    				ng-model="reminder.treatment.vaccines.rabies"
+	    				ng-true-value="1"
+	    				ng-false-value="-1"
+	    				ng-show="reminder.pet == 0">
 	    			Antirrábica
 	    		</label>
-	    		<label for="vaccine.other">
-		    		<input name="vaccine.other" id="vaccine.other" type="checkbox" 
-		    			ng-model="reminder.treatment.vaccines.other" ng-true-value="2" ng-false-value="-1">
-	    			Otra
+	    		<label for="vaccine.pneumodog" ng-show="reminder.pet == 0">
+		    		<input name="vaccine.pneumodog" id="vaccine.pneumodog" type="checkbox" 
+		    			ng-model="reminder.treatment.vaccines.pneumodog"
+		    			ng-true-value="2"
+		    			ng-false-value="-1"
+		    			ng-show="reminder.pet == 0">
+	    			Pneumodog
+	    		</label>
+	    		<label for="vaccine.trivalent" ng-show="reminder.pet == 1">
+		    		<input name="vaccine.trivalent" id="vaccine.trivalent" type="checkbox" 
+		    			ng-model="reminder.treatment.vaccines.trivalent"
+		    			ng-true-value="3"
+		    			ng-false-value="-1"
+		    			ng-show="reminder.pet == 1">
+	    			Trivalente
+	    		</label>
+	    		<label for="vaccine.leukemia" ng-show="reminder.pet == 1">
+		    		<input name="vaccine.leukemia" id="vaccine.leukemia" type="checkbox" 
+		    			ng-model="reminder.treatment.vaccines.leukemia"
+		    			ng-true-value="4"
+		    			ng-false-value="-1"
+		    			ng-show="reminder.pet == 1">
+	    			Leucemia
 	    		</label>	
 			</fieldset>			
 		</li>
 		<li class="ui-field-contain" ng-show="reminder.treatment.type != 0">
-			<label for="reminder-notes">Notas</label>
-	    	<textarea cols="40" rows="8" name="reminder-notes" id="reminder-notes" ng-model="reminder.treatment.notes">Textarea</textarea>
+			<label for="reminder-notes">Producto</label>
+			<input name="reminder-text" name="reminder-notes" type="text" ng-model="reminder.treatment.notes">	    	
 		</li>
 		<li class="ui-field-contain">
-	    	<label for="reminder-begin">Apartir de</label>
+	    	<label for="reminder-begin">Próxima</label>
 	    	<input name="reminder-begin" id="reminder-begin" type="text" mobiscroll-date="reminder.begin" 
 				mobiscroll-options="{ 
 						display: 'bottom',
@@ -63,12 +92,13 @@
 		<li class="ui-field-contain">
 			<label for="reminder-frequency">Frecuencia</label>
 			<select name="reminder-frequency" id="reminder-frequency" data-mini="true" 
-				ng-model="reminder.frequency" ng-options="frequency.id as frequency.text for frequency in frequencies" apply-jqm-select-refresh ng-change="changeFrequency(reminder.frequency)">
+				ng-model="reminder.frequency" ng-options="frequency.id as frequency.text for frequency in frequencies"
+				ng-change="changeFrequency(reminder.frequency)"
+				apply-jqm-select-refresh >
 	   		</select>			
 		</li>
 		<li class="ui-field-contain">
-			<label for="reminder-duration">Duraci&oacute;n</label>
-			<!--<input name="reminder-duration" id="reminder-duration" mobiscroll-number="reminder.duration" ng-model="reminder.duration" ng-disabled="reminder.frequency == 0" disabled="disabled">-->
+			<label for="reminder-duration">Avisar durante</label>
 			<input name="reminder-duration" id="reminder-duration" ng-model="reminder.duration" ng-disabled="reminder.frequency == 0" disabled="disabled" 
 				mobiscroll-number="reminder.duration" 
 		   		mobiscroll-options="{

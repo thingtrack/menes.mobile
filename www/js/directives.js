@@ -1,8 +1,6 @@
 'use strict';
 
 /* Directives */
-
-
 angular.module('myApp.directives', [])
 	.directive('applyJqm', function() {
 	    return {
@@ -33,7 +31,7 @@ angular.module('myApp.directives', [])
       return{
         link: function(scope, elm, attrs) {
           var unbindWatcher = scope.$watch(attrs.ngModel, function(newValue, oldValue) {
-           if (newValue != undefined && oldValue === undefined) {
+           if (newValue != undefined) {
               elm.selectmenu('refresh');
               unbindWatcher();
             }
