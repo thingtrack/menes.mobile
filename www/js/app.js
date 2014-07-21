@@ -5,14 +5,15 @@
 angular.module('myApp', [
   'ngRoute',
   'ngCordova',
-  'angular-carousel',
+  'angular-flexslider',
   'myApp.filters',
   'myApp.services',
   'myApp.directives',
   'myApp.controllers',
   'mobiscroll-datetime',
   'mobiscroll-listview',
-  'mobiscroll-number'
+  'mobiscroll-number',
+  'LocalStorageModule'
 ]).
 config(['$compileProvider', function($compileProvider){
   	$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);

@@ -1,5 +1,5 @@
-<ul rn-carousel rn-carousel-control rn-carousel-indicator class="image" style="height: 300px;">
-  <li ng-repeat="image in images" ng-style="{ backgroundImage: 'url(' + image.path + ')' }" style="background-size: contain; background-repeat: no-repeat;">
-    <div class="slidelabel">{{ image.label }}</div>
-  </li>
-</ul>
+<flex-slider slide="s in slides" animation="slide">
+    <li>
+        <img ng-src="{{s}}">
+    </li>
+</flex-slider>

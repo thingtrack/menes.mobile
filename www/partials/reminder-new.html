@@ -1,9 +1,9 @@
-<form ng-submit="addReminder(reminder)" apply-jqm>
+<form name="reminderForm" ng-submit="addReminder(reminder)" novalidate apply-jqm>
 	<ul data-role="listview" data-inset="true">
 		<li data-role="list-divider">Datos del paciente(s)</li>
 		<li class="ui-field-contain">
 	    	<label for="reminder-text">Nombre(s)</label>
-	    	<input name="reminder-text" id="reminder-text" type="text" ng-model="reminder.text">
+	    	<input name="reminder-text" id="reminder-text" type="text" ng-model="reminder.text" required>
 		</li>
 		<li class="ui-field-contain">
 			<label for="reminder-pet">Especie</label>
@@ -71,7 +71,7 @@
 		</li>
 		<li class="ui-field-contain" ng-show="reminder.treatment.type != 0">
 			<label for="reminder-notes">Producto</label>
-			<input name="reminder-text" name="reminder-notes" type="text" ng-model="reminder.treatment.notes">	    	
+			<input name="reminder-notes" type="text" ng-model="reminder.treatment.notes" ng-required="reminder.treatment.type!=0">
 		</li>
 		<li class="ui-field-contain">
 	    	<label for="reminder-begin">Próxima</label>
@@ -87,14 +87,15 @@
 						yearText: 'Año',
 						setText: 'Aceptar',
 						cancelText: 'Cancelar'
-					}" />
+					}"
+					required/>
 		</li>
 		<li class="ui-field-contain">
 			<label for="reminder-frequency">Frecuencia</label>
 			<select name="reminder-frequency" id="reminder-frequency" data-mini="true" 
 				ng-model="reminder.frequency" ng-options="frequency.id as frequency.text for frequency in frequencies"
 				ng-change="changeFrequency(reminder.frequency)"
-				apply-jqm-select-refresh >
+				apply-jqm-select-refresh>
 	   		</select>			
 		</li>
 		<li class="ui-field-contain">
@@ -112,10 +113,12 @@
 	        			wholeText: 'Años',
 	        			setText: 'Aceptar',
 						cancelText: 'Cancelar'
-		   	}">			
+		   	}"
+		   	ng-required="reminder.frequency!=0">				
 		</li>
 		<li class="ui-field-contain">
-			<button type="submit" data-theme="b">Crear</button>	
+			<button type="submit" data-theme="b" ng-disabled="reminderForm.$invalid">Crear</button>	
 		</li>
+		<pre>{{reminder | json}}</pre>
 	</form>
 </ul>

@@ -6,8 +6,10 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', [])
-.factory("reminderService", [ "$cordovaPush", function($cordovaPush){
+.factory("reminderService", [ "$cordovaPush", "localStorageService", 
+	function($cordovaPush, localStorageService){
 
+	var REMINDERS_KEY = "reminders-key";
 	var notificacionIndex = -1;
 
 	function Treatment(type, vaccines, notes){
@@ -67,7 +69,7 @@ angular.module('myApp.services', [])
 
 			// retrive the Scheduled Local Notifications
 			window.plugin.notification.local.getScheduledIds(function (scheduledIds) {
-    			alert('Scheduled IDs: ' + scheduledIds.join(' ,'));
+    			console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
     		});
 		}
 	}
@@ -77,7 +79,7 @@ angular.module('myApp.services', [])
 			window.plugin.notification.local.cancel(reminder.id, function (){
 				// retrive the Scheduled Local Notifications
 				window.plugin.notification.local.getScheduledIds(function (scheduledIds) {
-	    			alert('Scheduled IDs: ' + scheduledIds.join(' ,'));
+	    			console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
 	    		});
 			});
 		}		
@@ -87,6 +89,15 @@ angular.module('myApp.services', [])
 
 	return {
 		all: function(){
+
+			reminders.length=0;;
+			var tempReminders = localStorageService.get(REMINDERS_KEY); 
+			
+			for (var i = 0; i < tempReminders.length; i++) {
+            	var reminderTemp = tempReminders[i];
+            	reminders.push(new Reminder(reminderTemp.id, reminderTemp.text, reminderTemp.pet, new Date(reminderTemp.date), reminderTemp.treatment));				
+        	}
+			
 			return reminders;
 		},
 		add: function(reminder){
@@ -134,12 +145,19 @@ angular.module('myApp.services', [])
 
 			while(repetition > 0){
 
-				
-				notificacionIndex ++; 
-				reminders.push(new Reminder(notificacionIndex.toString(), reminder.text, reminder.pet, reminderDate, reminder.treatment));
-				// add local notification
-				addLocalNotification(reminders[reminders.length-1]);
+				notificacionIndex ++;
 
+				reminders.push(new Reminder(notificacionIndex.toString(), reminder.text, reminder.pet, reminderDate, reminder.treatment));
+				localStorageService.clearAll();
+
+				if(localStorageService.add(REMINDERS_KEY, reminders)){
+					// add local notification
+					addLocalNotification(reminders[reminders.length-1]);	
+				}
+				else{
+					console.error("Error inserting the reminder");
+				}
+				
 				// create a new date object
 				reminderDate = new Date(reminderDate.getTime());
 			
@@ -181,7 +199,13 @@ angular.module('myApp.services', [])
 				// before the local notification
 				removeLocalNotification(reminders[reminderIndex]);
 
-				reminders.splice(reminderIndex, 1);				
+				reminders.splice(reminderIndex, 1);
+
+				localStorageService.clearAll();
+
+				if(!localStorageService.add(REMINDERS_KEY, reminders)){
+					console.error("Error inserting the reminder");
+				}
 			}
 		},
 		check: function(reminder, done){

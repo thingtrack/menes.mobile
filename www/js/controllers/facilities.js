@@ -12,7 +12,21 @@ angular.module("myApp.controllers.facilities", [])
 
     $scope.sportImages = {};
 
-	$http.get('data/gallery.json').success(function(data) {
-	  		$scope.images = data;
-	});    
+	$scope.slides = [
+		'img/hospital-access.jpg',
+		'img/operating-room.jpg',
+		'img/ultrasound.jpg',		
+		'img/laboratory.jpg',
+		'img/operating-microscope.jpg',
+		'img/cat-hospitalization.jpg',
+		'img/digital-radiology.jpg',
+		'img/sperm-bank.jpg',
+		'img/hospitalization.jpg',
+		'img/big-dog-hospitalization.jpg',
+		'img/endoscopy.jpg',
+		'img/monitoring-operating-room.jpg',	
+		'img/feline-cages.jpg',
+		'img/physiotherapy.jpg',	
+		'img/consultation.jpg'	
+	];    
 }]);

@@ -8,8 +8,16 @@
         <link rel="stylesheet" href="css/vendor/jquery.mobile-1.4.2.min.css"/>
         <link rel="stylesheet" href="css/themes/menes-style.min.css"/>
         <link rel="stylesheet" href="css/vendor/mobiscroll.custom-2.11.1.min.css"/>
-        <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css"/>
+        <link rel="stylesheet" href="bower_components/flexslider/flexslider.css">
         <link rel="stylesheet" href="css/app.css"/>
+        <style type="text/css">
+            div.gallery-row:after { clear: both; content: "."; display: block; height: 0; visibility: hidden; }
+            div.gallery-item { float: left; width: 33.333333%; }
+            div.gallery-item a { display: block; margin: 5px; border: 1px solid #3c3c3c; }
+            div.gallery-item img { display: block; width: 100%; height: auto; }
+            #Gallery1 .ui-content, #Gallery2 .ui-content { overflow: hidden; }
+        </style>
+
         <meta name="msapplication-tap-highlight" content="no" />
         <title>Cl&iacute;nica Nacho Menes</title>
     </head>
@@ -37,12 +45,15 @@
         <script src="js/jqm-config.js"></script>
         <script src="js/vendor/jquery.mobile-1.4.2.js"></script>
         <script src="js/vendor/jquery.ui.map.full.min.js"></script>
-      
+        
+        <script src="bower_components/flexslider/jquery.flexslider-min.js"></script>
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/angular-touch/angular-touch.js"></script>
         <script src="bower_components/angular-carousel/dist/angular-carousel.min.js"></script>
         <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+        <script src="bower_components/angular-local-storage/angular-local-storage.min.js"></script>
+        <script src="bower_components/angular-flexslider/angular-flexslider.js"></script>
 
         <script src="js/vendor/mobiscroll.custom-2.11.1.min.js"></script>
 
@@ -72,6 +83,7 @@
                 // Hide the splashscreen
                 navigator.splashscreen.hide();
             }
-        </script>         
+        </script>    
+        <script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>
    </body>
 </html>

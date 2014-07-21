@@ -64,6 +64,9 @@ angular.module("myApp.controllers.reminder", [])
 
     $scope.getPet = function(id){
 
+        if($scope.pets == null)
+            return;
+
         for (var i = 0; i < $scope.pets.length; i++) {
             if($scope.pets[i].id == id)
                 return $scope.pets[i].name;
@@ -72,6 +75,10 @@ angular.module("myApp.controllers.reminder", [])
 
     $scope.getTypes = function(vaccines){
         var vaccineTypes = "";
+        
+        if($scope.vaccines == null)
+            return;
+        
         jQuery.each(vaccines, function (name, value) {
             
             if(value != null){
@@ -99,6 +106,7 @@ angular.module("myApp.controllers.reminder", [])
 	$scope.changeHeaderTitle("Nuevo recordatorio");
     $scope.addHeaderLeftButton("Cancelar", "#/reminder", "ui-icon-arrow-l");
     $scope.reminder = {};
+    $scope.reminder.begin = new Date();
     $scope.reminder.treatment = {};
 
     // charge the selectable controls
@@ -155,5 +163,22 @@ angular.module("myApp.controllers.reminder", [])
     $scope.addReminder = function(reminder){
         reminderService.add(reminder);
         $location.path('/reminder');        
+    }
+
+    $scope.validateVaccines = function(type, vaccines){
+
+        if(!vaccines)
+            return false;
+
+        // there is no selected the vaccine type treatment
+        if(type > 0)
+            return false;
+
+        for (var key in vaccines) {
+            if(parseInt(vaccines[key]) > -1)
+                return false;
+        }       
+
+        return true;
     }
 }]);
