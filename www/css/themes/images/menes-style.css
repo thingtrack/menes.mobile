@@ -402,7 +402,7 @@ html body .ui-group-theme-b .ui-bar-inherit {
 .ui-page-theme-b .ui-panel-wrapper {
 	background-color: #c7c7c7 /*{b-page-background-color}*/;
 	border-color: #828282 /*{b-page-border}*/;
-	color: #e89411 /*{b-page-color}*/;
+	color: #333333 /*{b-page-color}*/;
 	text-shadow: 0 /*{b-page-shadow-x}*/ 1px /*{b-page-shadow-y}*/ 0 /*{b-page-shadow-radius}*/ #f3f3f3 /*{b-page-shadow-color}*/;
 }
 /* Body: Read-only lists, text inputs, collapsible content */
@@ -461,7 +461,7 @@ html body .ui-group-theme-b .ui-btn:visited,
 html head + body .ui-btn.ui-btn-b:visited {
 	background-color: #e0e1df /*{b-bup-background-color}*/;
 	border-color: #3d3d3d /*{b-bup-border}*/;
-	color: #e89411 /*{b-bup-color}*/;
+	color: #FFFe89411 /*{b-bup-color}*/;
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #ffffff /*{b-bup-shadow-color}*/;
 }
 /* Button hover */
@@ -472,7 +472,7 @@ html body .ui-group-theme-b .ui-btn:hover,
 html head + body .ui-btn.ui-btn-b:hover {
 	background-color: #fdd391 /*{b-bhover-background-color}*/;
 	border-color: #e89411 /*{b-bhover-border}*/;
-	color: #e89411 /*{b-bhover-color}*/;
+	color: #333333 /*{b-bhover-color}*/;
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #f3f3f3 /*{b-bhover-shadow-color}*/;
 }
 /* Button down */

@@ -9,7 +9,7 @@
 		    		<img ng-if="reminder.treatment.type == 0" ng-src="img/icons/syringe.png">
 					<img ng-if="reminder.treatment.type != 0" ng-src="img/icons/pill.png">
 					<h2>{{reminder.text}}</h2>
-		    		<p><strong>{{getPet(reminder.pet)}}, {{getTreatment(reminder.treatment.type)}}</strong></p>
+		    		<p><strong>{{getTreatment(reminder.treatment.type)}}</strong></p>
 		    		<p>{{getTypes(reminder.treatment.vaccines)}}</p>
 		    		<p>{{reminder.treatment.notes}}</p>
 		    		<p class="ui-li-aside">{{reminder.date.getDate()}}/{{reminder.date.getMonth()}}/{{reminder.date.getFullYear()}}</p>

@@ -28,5 +28,5 @@ angular.module("myApp.controllers.facilities", [])
 		'img/feline-cages.jpg',
 		'img/physiotherapy.jpg',	
 		'img/consultation.jpg'	
-	];    
+	];   
 }]);
