@@ -1,6 +1,6 @@
 <form name="reminderForm" ng-submit="addReminder(reminder)" novalidate apply-jqm>
 	<ul data-role="listview" data-inset="true">
-		<li data-role="list-divider">Datos del paciente(s)</li>
+		<li data-role="list-divider">Datos de la(s) mascota(s)</li>
 		<li class="ui-field-contain">
 	    	<label for="reminder-text">Nombre(s)</label>
 	    	<input name="reminder-text" id="reminder-text" type="text" ng-model="reminder.text" required>
@@ -14,7 +14,7 @@
    				apply-jqm-select-refresh>
        		</select>			
 		</li>
-		<li data-role="list-divider">Tratamiento</li>
+		<li data-role="list-divider">Recordatorio</li>
 		<li class="ui-field-contain">
 			<label for="reminder-treatment">Tipo</label>
    			<select name="reminder-treatment" id="reminder-treatment" 
@@ -119,6 +119,6 @@
 		<li class="ui-field-contain">
 			<button type="submit" data-theme="b" ng-disabled="reminderForm.$invalid">Crear</button>	
 		</li>
-		<pre>{{reminder | json}}</pre>
 	</form>
+	<pre>{{reminder | json}}</pre>
 </ul>

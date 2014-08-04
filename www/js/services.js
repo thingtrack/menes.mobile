@@ -36,12 +36,12 @@ angular.module('myApp.services', [])
 		if(window.plugin){
 			var messageStr = "";
 			// Vaccines & deworming
-			if(0 <= reminder.treatment.type < 3){
+			if(reminder.treatment.type < 3){
 				messageStr = "Le recordarmos que a " + reminder.text + " le corresponde";
 			
 				// treatment types
 				if(reminder.treatment.type == 0){
-					messageStr += " la vacuna. No olvide llamarnos para pedir cita previa";	
+					messageStr += " la vacunación. No olvide llamarnos para pedir cita previa.";	
 				}
 				if(reminder.treatment.type == 1){
 					messageStr += " la desparasitación interna.";
@@ -53,11 +53,11 @@ angular.module('myApp.services', [])
 			else{
 				// Review
 				if(reminder.treatment.type == 3){
-					messageStr += "Le recordamos que " + reminder.text + " debe acudir a su revisión periódica, no olvide llamarnos para pedir cita previa";
+					messageStr += "Le recordamos que " + reminder.text + " debe acudir a su revisión periódica, no olvide llamarnos para pedir cita previa.";
 				}
 				// General treatment
-				if(reminder.treatment.type == 3){
-					messageStr += "Le recordamos que a " + reminder.text + " le corresponde su tratamiento";
+				if(reminder.treatment.type == 4){
+					messageStr += "Le recordamos que a " + reminder.text + " le corresponde su tratamiento.";
 				}
 			}
 			window.plugin.notification.local.add({
@@ -69,7 +69,7 @@ angular.module('myApp.services', [])
 
 			// retrive the Scheduled Local Notifications
 			window.plugin.notification.local.getScheduledIds(function (scheduledIds) {
-    			console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
+    			// console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
     		});
 		}
 	}
@@ -79,7 +79,7 @@ angular.module('myApp.services', [])
 			window.plugin.notification.local.cancel(reminder.id, function (){
 				// retrive the Scheduled Local Notifications
 				window.plugin.notification.local.getScheduledIds(function (scheduledIds) {
-	    			console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
+	    			// console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
 	    		});
 			});
 		}		
@@ -214,7 +214,7 @@ angular.module('myApp.services', [])
 
 			if(reminderIndex > -1){
 
-				if(!done){
+				if(done){
 					// remove the local notification
 					removeLocalNotification(reminders[reminderIndex]);
 				}

@@ -9,24 +9,22 @@ angular.module("myApp.controllers.facilities", [])
 
     $scope.changeHeaderTitle("Instalaciones");
     $scope.addHeaderLeftButton("Menu", "#main-menu", "ui-icon-bars");
-
-    $scope.sportImages = {};
-
+	
 	$scope.slides = [
-		'img/hospital-access.jpg',
-		'img/operating-room.jpg',
-		'img/ultrasound.jpg',		
-		'img/laboratory.jpg',
-		'img/operating-microscope.jpg',
-		'img/cat-hospitalization.jpg',
-		'img/digital-radiology.jpg',
-		'img/sperm-bank.jpg',
-		'img/hospitalization.jpg',
-		'img/big-dog-hospitalization.jpg',
-		'img/endoscopy.jpg',
-		'img/monitoring-operating-room.jpg',	
-		'img/feline-cages.jpg',
-		'img/physiotherapy.jpg',	
-		'img/consultation.jpg'	
+		'img/hospital-access_m.jpg',
+		'img/operating-room_m.jpg',
+		'img/ultrasound_m.jpg',		
+		'img/laboratory_m.jpg',
+		'img/operating-microscope_m.jpg',
+		'img/cat-hospitalization_m.jpg',
+		'img/digital-radiology_m.jpg',
+		'img/sperm-bank_m.jpg',
+		'img/hospitalization_m.jpg',
+		'img/big-dog-hospitalization_m.jpg',
+		'img/endoscopy_m.jpg',
+		'img/monitoring-operating-room_m.jpg',	
+		'img/feline-cages_m.jpg',
+		'img/physiotherapy_m.jpg',	
+		'img/consultation_m.jpg'	
 	];   
 }]);

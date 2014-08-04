@@ -15,9 +15,6 @@ angular.module('myApp', [
   'mobiscroll-number',
   'LocalStorageModule'
 ]).
-config(['$compileProvider', function($compileProvider){
-  	$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-}]).
 config(['$routeProvider', function($routeProvider) {
   
     $routeProvider.otherwise({ redirectTo: '/home' });
