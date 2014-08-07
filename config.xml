@@ -4,13 +4,13 @@
     <description>
         La aplicación del hospital veterinario Nacho Menes.
     </description>
-    <author email="info@thingtrack.com" href="http://www.thinhtrack.com">
+    <author email="info@thingtrack.com" href="http://www.thingtrack.com">
         Thingtrack S.L.
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <icon src="www/res/icon.png" />
-     <platform name="android">
+    <!-- Platform Icons -->
+    <platform name="android">
               <icon src="res/android/drawable-mdpi/ic_launcher.png" density="ldpi" />
               <icon src="res/android/drawable-hdpi/ic_launcher.png" density="mdpi" />
               <icon src="res/android/drawable-xhdpi/ic_launcher.png" density="hdpi" />
@@ -32,6 +32,7 @@
               <icon src="res/ios/ic_launcher_29.png" width="29" height="29" />
               <icon src="res/ios/ic_launcher_58.png" width="58" height="58" />
       </platform>
+    <!-- Splash screens -->
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="10000" />
 </widget>

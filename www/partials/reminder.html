@@ -12,7 +12,7 @@
 		    		<p><strong>{{getTreatment(reminder.treatment.type)}}</strong></p>
 		    		<p>{{getTypes(reminder.treatment.vaccines)}}</p>
 		    		<p>{{reminder.treatment.notes}}</p>
-		    		<p class="ui-li-aside">{{reminder.date.getDate()}}/{{reminder.date.getMonth()}}/{{reminder.date.getFullYear()}}</p>
+		    		<p class="ui-li-aside">{{reminder.date.getDate()}}/{{reminder.date.getMonth()+1}}/{{reminder.date.getFullYear()}}</p>
 		        </a>
 		        <a ng-href="" data-theme="b" ng-click="removeReminder(reminder)">Delete item</a>
 		    </li>
