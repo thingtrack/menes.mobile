@@ -6,8 +6,7 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', [])
-.factory("reminderService", [ "$cordovaPush", "localStorageService", 
-	function($cordovaPush, localStorageService){
+.factory("reminderService", [ "localStorageService", function(localStorageService){
 
 	var REMINDERS_KEY = "reminders-key";
 	var notificacionIndex = -1;
